@@ -101,14 +101,9 @@ func (m model) View() string {
 		result += ": " + italicStyle.Render(m.name)
 	}
 	endTime := m.start.Add(m.duration)
-
-	// Format remaining time with custom precision
-	remainingTime := m.duration - m.passed
-	formattedTime := formatDuration(remainingTime)
-
 	result +=
 		" - " + boldStyle.Render(endTime.Format(startTimeFormat)) +
-			" - " + boldStyle.Render(formattedTime) +
+			" - " + boldStyle.Render(m.timer.View()) +
 			"\n" + m.progress.View()
 	if m.altscreen {
 		return altscreenStyle.
